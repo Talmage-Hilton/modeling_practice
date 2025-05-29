@@ -16,3 +16,5 @@ I had two datasets - one with a continuous response and one with a binary respon
 - Boosting
 - BART (only in R)
 - Neural Network
+
+I had a lot of fun doing this and comparing R and python to each other! I noticed several strengths and weaknesses of both languages. Check out my blog post about more on this project!
