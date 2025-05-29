@@ -1,1 +1,18 @@
-# modeling_practice
+# Modeling Practice
+
+This repo contains various files I did to practice statistical modeling. This started when I realized I haven't used python in a couple years (I'm getting my Master's degree in statistics, so we use R almost exclusively), so I wanted to remember both how to code in python generally, and how to do some modeling in python. After doing it in python, I couldn't resist doing it in R as well. R is the first coding language I learned, so it holds a special place in my heart, what can I say.
+
+I had two datasets - one with a continuous response and one with a binary response. There were categorical variables in both datasets, so I converted them to dummy variables. Then I made the following models in both python and R with these datasets:
+- OLS
+- LASSO
+- Polynomial Reression
+- Natural Splines
+- GAM
+- Logistic Regression
+- K Nearest Neighbors
+- Support Vector Machines
+- Decision Tree (CART)
+- Random Forest
+- Boosting
+- BART (only in R)
+- Neural Network
