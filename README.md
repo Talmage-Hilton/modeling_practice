@@ -5,7 +5,7 @@ This repo contains various files I did to practice statistical modeling. This st
 I had two datasets - one with a continuous response and one with a binary response. There were categorical variables in both datasets, so I converted them to dummy variables. Then I made the following models in both python and R with these datasets:
 - OLS
 - LASSO
-- Polynomial Reression
+- Polynomial Regression
 - Natural Splines
 - GAM
 - Logistic Regression
