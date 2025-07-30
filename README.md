@@ -17,4 +17,4 @@ I had two datasets - one with a continuous response and one with a binary respon
 - BART (only in R)
 - Neural Network
 
-I had a lot of fun doing this and comparing R and python to each other! I noticed several strengths and weaknesses of both languages. Check out my blog post about more on this project!
+I had a lot of fun doing this and comparing R and python to each other! I noticed several strengths and weaknesses of both languages. Check out my [first blog post]("https://talmage-hilton.github.io/Stat-386-Blog/blog/model-explanations/") explaining the statistical models I used, and then [part two]("https://talmage-hilton.github.io/Stat-386-Blog/blog/modeling-practice/") that describes how to code them and shares the results from my analysis!
