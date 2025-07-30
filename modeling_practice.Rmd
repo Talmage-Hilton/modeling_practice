@@ -226,6 +226,11 @@ lasso_model <- glmnet(X_train_scaled, y_train, alpha = 1, lambda = 0.1)
 coef(lasso_model)
 ```
 
+```{r}
+# Now run OLS with those coefficients
+summary(lm(exam_score ~ age + study_hours_per_day + social_media_hours + netflix_hours + part_time_job + attendance_percentage + sleep_hours + exercise_frequency + mental_health_rating + genderOther + diet_qualityGood + internet_qualityGood, data=df))
+```
+
 
 
 
@@ -389,6 +394,7 @@ library(FNN)
 library(caret)
 library(pROC)
 library(dplyr)
+library(ggplot2)
 
 # Ensure 'Purchased' is a factor (0/1)
 ads$Purchased <- as.factor(ads$Purchased)
@@ -432,6 +438,27 @@ cat(sprintf("Out-of-sample AUC: %.4f\n", test_auc))
 
 # Optional: Print confusion matrix for test set
 confusionMatrix(test_preds, y_test, positive = "1")
+
+# Compute ROC object for test set
+roc_obj <- roc(as.numeric(as.character(y_test)), test_probs)
+
+# Convert ROC object to data frame
+roc_df <- data.frame(
+  specificities = rev(roc_obj$specificities),  # FPR = 1 - specificity
+  TruePositiveRate = rev(roc_obj$sensitivities)
+)
+
+# Plot using ggplot2
+ggplot(roc_df, aes(x = 1 - specificities, y = TruePositiveRate)) +
+  geom_line(color = "#1c61b6", size = 1.2) +
+  geom_abline(slope = 1, intercept = 0, linetype = "dashed") +
+  labs(
+    title = paste0("ROC Curve for KNN (AUC = ", round(auc(roc_obj), 4), ")"),
+    x = "False Positive Rate (1 - Specificity)",
+    y = "True Positive Rate (Sensitivity)"
+  ) +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5))
 ```
 
 
@@ -894,8 +921,13 @@ cat("In-sample AUC:", round(auc_train, 4), "\n")
 cat("Out-of-sample Accuracy:", round(acc_test, 4), "\n")
 cat("Out-of-sample AUC:", round(auc_test, 4), "\n")
 
-# Optional: Confusion matrix for test set
-table(Predicted = y_test_pred, Actual = y_test)
+# Classification report (precision, recall, F1)
+conf_mat <- confusionMatrix(
+  factor(y_test_pred, levels = c(0, 1)),
+  factor(y_test, levels = c(0, 1)),
+  positive = "1"
+)
+print(conf_mat)
 ```
 
 
@@ -1001,9 +1033,13 @@ cat("In-sample AUC:", round(auc_train, 4), "\n")
 cat("Out-of-sample Accuracy:", round(acc_test, 4), "\n")
 cat("Out-of-sample AUC:", round(auc_test, 4), "\n")
 
-# Optional: Confusion matrix
-cat("\nConfusion Matrix (OOS):\n")
-print(table(Predicted = y_test_pred, Actual = y_test))
+# Classification report (precision, recall, F1)
+conf_mat <- confusionMatrix(
+  factor(y_test_pred, levels = c(0, 1)),
+  factor(y_test, levels = c(0, 1)),
+  positive = "1"
+)
+print(conf_mat)
 ```
 
 
@@ -1131,6 +1167,13 @@ cat("Train Accuracy:", round(acc_train, 4), "\n")
 cat("Train AUC:", round(auc_train, 4), "\n")
 cat("Test Accuracy:", round(acc_test, 4), "\n")
 cat("Test AUC:", round(auc_test, 4), "\n")
+
+conf_mat <- confusionMatrix(
+  factor(y_test_pred, levels = c(0, 1)),
+  factor(y_test, levels = c(0, 1)),
+  positive = "1"
+)
+print(conf_mat)
 ```
 
 
